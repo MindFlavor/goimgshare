@@ -1,0 +1,32 @@
+.fluidcontainer {
+    width:100%;
+    background-color:#ddd;
+}
+
+.fluidcontainer:before, .fluidcontainer:after {
+    display:table;
+    content:"";
+}
+
+.fluidcontainer:after {
+    clear:both;
+}
+
+.fluidcontainer ul {
+    padding:10px;
+}
+
+#aff_rating {
+    list-style-type:none;
+}
+
+#aff_rating li {
+    float:left;
+    margin-right:6px;
+    width:30%;
+}
+
+#aff_rating li img {
+    width:100%;
+    height:auto;
+}
