@@ -34,17 +34,6 @@ controller('Main', ['$scope', '$http', '$window', function ($scope, $http, $wind
       if ($scope.permafolders === null) {
         $scope.retrievePermafolders();
       }
-
-        $scope.isSelected = function(p) {
-            if(p === $scope.selectedFolder)
-                return "active";
-            else
-                return "std";
-        }
-
-        $scope.selectFolder = function(b) {
-            $scope.selectedFolder = b
-        }
     }]);
 
 

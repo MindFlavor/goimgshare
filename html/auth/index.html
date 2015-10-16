@@ -18,7 +18,7 @@
 
 <body ng-app="myApp" ng-controller="Main as main">
 <div class="row">
-    <div class="col-md-6" ng-repeat="item in permafolders"><a href="/folders/{{item.ID}}"><div class="btn btn-lg btn-primary btn-block">{{item.Name}}</div></a></div>
+    <div class="col-md-6" ng-repeat="item in permafolders"><a href="/html/folder.html?id={{item.ID}}"><div class="btn btn-lg btn-primary btn-block">{{item.Name}}</div></a></div>
 </div>
 
   <script src="/html/jquery-1.9.1.min.js"></script>

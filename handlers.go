@@ -9,8 +9,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/mindflavor/testauth/authdb"
-	"github.com/mindflavor/testauth/physical"
+	"github.com/mindflavor/goimgshare/authdb"
 )
 
 const staticDirectory = "html"
@@ -58,25 +57,6 @@ func redirectHandler(redirectTo string) func(w http.ResponseWriter, r *http.Requ
 	}
 }
 
-func handleFolders(w http.ResponseWriter, r *http.Request) {
-	file, err := os.Open("C:\\temp\\config.json")
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-	phyFolders, err := physical.Load(file)
-	if err != nil {
-		log.Printf("Error %s", err)
-		jsonifyError(w, err)
-		return
-	}
-
-	logFolders := phyFolders.ToLogical()
-
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	json.NewEncoder(w).Encode(logFolders)
-}
-
 func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
@@ -98,7 +78,7 @@ func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Reque
 		// cache miss
 		f, err := os.Open(localPath)
 		if err != nil {
-			log.Printf("Err: cannot open %s: %s", localPath, err)
+			log.Printf("ERROR: cannot open %s: %s", localPath, err)
 			http.Error(w, err.Error(), 100)
 			return
 		}
@@ -106,12 +86,11 @@ func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Reque
 		buf := new(bytes.Buffer)
 		_, err = buf.ReadFrom(f)
 		if err != nil {
-			panic("Cannot read auth file")
+			panic("ERROR: Cannot read auth file")
 		}
 
 		// check if css so we change the content type
 		if strings.ToLower(path.Ext(page)) == ".css" {
-			log.Printf("Setting content type to text/css")
 			w.Header().Set("Content-Type", "text/css")
 		}
 
@@ -119,10 +98,30 @@ func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Reque
 
 		// store in cache
 		staticCache[localPath] = buf.Bytes()
-
 	}
 }
 
 func jsonifyError(w http.ResponseWriter, err error) {
 	json.NewEncoder(w).Encode(err)
+}
+
+func contentTypeFromExtension(fn string) string {
+	switch strings.ToLower(path.Ext(fn)) {
+	case ".jpg":
+		return "image/jpeg"
+	case ".png":
+		return "image/png"
+	case ".gif":
+		return "image/gif"
+
+	case ".mp4":
+		return "video/mp4"
+	case ".mkv":
+		return "x-matroska"
+	case ".avi":
+		return "video/x-msvideo"
+
+	default:
+		return "application/octet-stream"
+	}
 }

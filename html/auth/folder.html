@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="folder" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="folder" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="folder" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="folder" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ImgShare</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/html/my.css">
+    <link rel="icon" href="/html/developer_folder.ico">
+
+</head>
+
+<body ng-app="folder" ng-controller="Main as main">
+<h3>Images</h3>
+<div class="row">
+    <div class="col-md-6" ng-repeat="item in remoteImages"><a ng-href="{{getItemURL(item)}}"><img ng-href=="{{getThumbnailURL(item)}}" /></a></div>
+</div>
+<h3>Videos</h3>
+<div class="row" ng-show="remoteVideos.Length() > 0">
+    <div class="col-md-6" ng-repeat="item in remoteVideos"><a ng-href="{{getItemURL(item)}}">{{item.Name}}</a></div>
+</div>
+<h3>Extra</h3>
+<div class="row">
+    <div class="col-md-6" ng-repeat="item in remoteExtra"><a ng-href="{{getItemURL(item)}}">{{item.Name}}</a></div>
+</div>
+
+<script src="/html/jquery-1.9.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="/html/angular.js"></script>
+<script src="/html/angular-route.js"></script>
+<script src="/html/folder.js"></script>
+<script src="/html/version.js"></script>
+<script src="/html/version-directive.js"></script>
+<script src="/html/interpolate-filter.js"></script>
+</body>
+</html>
