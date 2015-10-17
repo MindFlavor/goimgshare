@@ -69,11 +69,13 @@ func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Reque
 
 		localPath := path.Join(staticDirectory, folder, page)
 
-		//		if val, ok := staticCache[path]; ok {
-		//			// cache hit
-		//			w.Write(val)
-		//			return
-		//		}
+		if conf.CacheInternalHTTPFiles {
+			if buf, ok := staticCache[localPath]; ok {
+				// cache hit
+				w.Write(buf)
+				return
+			}
+		}
 
 		// cache miss
 		f, err := os.Open(localPath)
@@ -96,8 +98,10 @@ func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Reque
 
 		w.Write(buf.Bytes())
 
-		// store in cache
-		staticCache[localPath] = buf.Bytes()
+		if conf.CacheInternalHTTPFiles {
+			// store in cache
+			staticCache[localPath] = buf.Bytes()
+		}
 	}
 }
 

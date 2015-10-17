@@ -1,6 +1,7 @@
 package authdb
 
 import (
+	"fmt"
 	"github.com/stretchr/signature"
 	"log"
 	"net/http"
@@ -43,6 +44,27 @@ func (db DB) IsRegistered(sig Signature) bool {
 	}
 
 	return false
+}
+
+func (db DB) EmailFromHTTPRequest(r *http.Request) string {
+	auth := "unauthenticated"
+
+	cookie, err := r.Cookie("auth")
+	if err == nil {
+		auth, _ = db.Email(Signature(cookie.Value))
+	}
+
+	return auth
+}
+
+func (db DB) Email(sig Signature) (string, error) {
+	val, found := db[sig]
+
+	if found {
+		return val.email, nil
+	}
+
+	return "forged identity", fmt.Errorf("Invalid signature %s", sig)
 }
 
 func (db DB) IsAuthorized(phyFolders *physical.Folders, r *http.Request, folderID string) bool {

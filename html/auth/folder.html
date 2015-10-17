@@ -17,15 +17,20 @@
 </head>
 
 <body ng-app="folder" ng-controller="Main as main">
-<h3>Images</h3>
-<div class="row">
-    <div class="col-md-6" ng-repeat="item in remoteImages"><a ng-href="{{getItemURL(item)}}"><img ng-href=="{{getThumbnailURL(item)}}" /></a></div>
+<h3 ng-show="remoteImages.length > 0">Images</h3>
+<div class="fluidcontainer">
+    <ul id="aff_rating">
+        <li ng-repeat="item in remoteImages">
+        <a ng-href="{{getItemURL(item)}}">
+            <img class="img-responsive" ng-src="{{getSmallThumbnailURL(item)}}" />
+        </a>
+    </ul>
 </div>
-<h3>Videos</h3>
-<div class="row" ng-show="remoteVideos.Length() > 0">
+<h3 ng-show="remoteVideos.length > 0">Videos</h3>
+<div class="row">
     <div class="col-md-6" ng-repeat="item in remoteVideos"><a ng-href="{{getItemURL(item)}}">{{item.Name}}</a></div>
 </div>
-<h3>Extra</h3>
+<h3 ng-show="remoteExtra.length > 0">Extra</h3>
 <div class="row">
     <div class="col-md-6" ng-repeat="item in remoteExtra"><a ng-href="{{getItemURL(item)}}">{{item.Name}}</a></div>
 </div>

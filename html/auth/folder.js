@@ -25,8 +25,14 @@ angular.module('folder', [
         return '/file/' + id + '/' + item.Name;
     };
 
-    $scope.getThumbnailURL = function(item) {
-        return '/thumb/' + id + '/' + item.Name;
+    $scope.getSmallThumbnailURL = function(item) {
+        var s = '/smallthumb/' + id + '/' + item.Name
+        console.log("Called smallthumb: " + s)
+        return s;
+    };
+
+    $scope.getAvgThumbnailURL = function(item) {
+        return '/avgthumb/' + id + '/' + item.Name;
     };
 
     $scope.retrieveImages = function () {

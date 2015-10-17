@@ -1,0 +1,36 @@
+[
+  {
+    "ID":"001",
+    "Name":"Downloads",
+    "Path":"/home/MINDFLAVOR/mindflavor/Downloads",
+    "AuthorizedMails":{
+      "francesco.cogno@gmail.com":true,
+      "valentina.campora@gmail.com":true
+      }
+    },
+  {
+    "ID":"002",
+    "Name":"filmati_convertiti",
+    "Path":"/mnt/shared/filmati_convertiti",
+    "AuthorizedMails":{
+      "francesco.cogno@gmail.com":true,
+      "prova@test.com":true
+      }
+    },
+    {
+      "ID":"hidden",
+      "Name":"eBooks",
+      "Path":"/mnt/shared/eBooks",
+      "AuthorizedMails":{
+        "valentina.campora@gmail.com":true
+        }
+    },
+    {
+      "ID":"cast",
+      "Name":"20150802-20150814, Castagneto Carducci",
+      "Path":"/mnt/foto/Vacanze/20150802-20150814, Castagneto Carducci",
+      "AuthorizedMails":{
+        "francesco.cogno@gmail.com":true
+        }
+    }
+]

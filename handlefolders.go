@@ -116,10 +116,10 @@ func handleStaticFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Printf("GET\t%s (%d bytes)", fn, fi.Size())
+	log.Printf("GET granted to %s \t%s (%s)", aDB.EmailFromHTTPRequest(r), fn, formatSize(fi.Size()))
 
 	reader := bufio.NewReader(file)
-	buffer := make([]byte, 1024*8)
+	buffer := make([]byte, 1024*64)
 
 	w.Header().Set("Content-Type", contentTypeFromExtension(filename))
 	w.Header().Set("Content-Length", fmt.Sprintf("%d", fi.Size()))
@@ -131,7 +131,8 @@ func handleStaticFile(w http.ResponseWriter, r *http.Request) {
 	for {
 		read, err := reader.Read(buffer)
 		if err != nil && err != io.EOF {
-			log.Fatalf("ERROR: Error reading file %q", err)
+			log.Printf("ERROR: Error reading file %q", err)
+			return
 		}
 
 		if read == 0 {
@@ -140,7 +141,20 @@ func handleStaticFile(w http.ResponseWriter, r *http.Request) {
 
 		_, err = writer.Write(buffer[:read])
 		if err != nil {
-			log.Fatalf("ERROR: Error writing image %q", err)
+			log.Printf("ERROR: Error writing static file %q", err)
+			return
 		}
+	}
+}
+
+func formatSize(size int64) string {
+	if size < 1024 {
+		return fmt.Sprintf("%d bytes", size)
+	} else if size < 1024*1024 {
+		return fmt.Sprintf("%d KB", size/1024)
+	} else if size < 1024*1024*1024 {
+		return fmt.Sprintf("%d MB", size/(1024*1024))
+	} else {
+		return fmt.Sprintf("%d GB", size/(1024*1024*1024))
 	}
 }
