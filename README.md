@@ -21,8 +21,8 @@ go get -u github.com/mindflavor/goimgshare
 This will get the source code.
 3. Copy the sample configuration files where you want them to be. This step is optional, you can edit the original files without copying them. In that case, however, you will have to stash your changes before updating the source code.
 ``` 
-cp config.json /etc/goimgshare/config.json
-cp shared_folders.json /etc/goimgshare/shared_folders.json
+cp $GOPATH/src/github.com/mindflavor/goimgshare/config.json /etc/goimgshare/config.json
+cp $GOPATH/src/github.com/mindflavor/goimgshare/shared_folders.json /etc/goimgshare/shared_folders.json
 ```
 Of course replace /etc/goimgshare with your path. Windows users should use a Windows path of your choosing.
 4. Edit the configuration files. On how to do that consult the (config_files) section.
