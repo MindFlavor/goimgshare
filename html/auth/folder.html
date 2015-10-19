@@ -14,9 +14,18 @@
     <link rel="stylesheet" href="/html/my.css">
     <link rel="icon" href="/html/developer_folder.ico">
 
+	<script src="/html/jquery-1.9.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+	<script src="/html/angular.js"></script>
+	<script src="/html/angular-route.js"></script>
+	<script src="/html/folder.js"></script>
+	<script src="/html/version.js"></script>
+	<script src="/html/version-directive.js"></script>
+	<script src="/html/interpolate-filter.js"></script>
 </head>
 
-<body ng-app="folder" ng-controller="Main as main">
+<body ng-app="folder" ng-controller="Main as main" ng-cloak>
 <h3 ng-show="remoteImages.length > 0">Images</h3>
 <div class="fluidcontainer">
     <ul id="aff_rating">
@@ -35,14 +44,5 @@
     <div class="col-md-6" ng-repeat="item in remoteExtra"><a ng-href="{{getItemURL(item)}}">{{item.Name}}</a></div>
 </div>
 
-<script src="/html/jquery-1.9.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-<script src="/html/angular.js"></script>
-<script src="/html/angular-route.js"></script>
-<script src="/html/folder.js"></script>
-<script src="/html/version.js"></script>
-<script src="/html/version-directive.js"></script>
-<script src="/html/interpolate-filter.js"></script>
 </body>
 </html>

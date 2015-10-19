@@ -14,8 +14,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="/html/bootstrap-social.css">
     <link rel="icon" href="/html/developer_folder.ico">
+	
+	<script src="/html/jquery-1.9.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+	<script src="/html/angular.js"></script>
+	<script src="/html/angular-route.js"></script>
+	<script src="/html/auth.js"></script>
+	<script src="/html/version.js"></script>
+	<script src="/html/version-directive.js"></script>
+	<script src="/html/interpolate-filter.js"></script>
 </head>
-<body ng-app="auth" ng-controller="Main as main">
+<body ng-app="auth" ng-controller="Main as main" ng-cloak>
 <div class="container">
     <a href="/auth/github/login">
         <img src="/html/github.png" ng-show="IsSupportedAuth('Github')" />
@@ -30,14 +40,5 @@
     </a>
 </div>
 
-<script src="/html/jquery-1.9.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-<script src="/html/angular.js"></script>
-<script src="/html/angular-route.js"></script>
-<script src="/html/auth.js"></script>
-<script src="/html/version.js"></script>
-<script src="/html/version-directive.js"></script>
-<script src="/html/interpolate-filter.js"></script>
 </body>
 </html>

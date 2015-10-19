@@ -14,13 +14,6 @@
   <link rel="stylesheet" href="/html/my.css">
   <link rel="icon" href="/html/developer_folder.ico">
 
-</head>
-
-<body ng-app="myApp" ng-controller="Main as main">
-<div class="row">
-    <div class="col-md-6" ng-repeat="item in permafolders"><a href="/html/folder.html?id={{item.ID}}"><div class="btn btn-lg btn-primary btn-block">{{item.Name}}</div></a></div>
-</div>
-
   <script src="/html/jquery-1.9.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -30,5 +23,12 @@
   <script src="/html/version.js"></script>
   <script src="/html/version-directive.js"></script>
   <script src="/html/interpolate-filter.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="Main as main" ng-cloak>
+<div class="row">
+    <div class="col-md-6" ng-repeat="item in permafolders"><a href="/html/folder.html?id={{item.ID}}"><div class="btn btn-lg btn-primary btn-block">{{item.Name}}</div></a></div>
+</div>
+
 </body>
 </html>
