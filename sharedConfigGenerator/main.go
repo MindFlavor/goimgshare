@@ -46,7 +46,7 @@ func addFolder(root, path string) {
 
 	// add item
 	f := physical.Folder{&logical.Folder{}, path, autMails}
-	f.ID = fmt.Sprintf("%10d", id)
+	f.ID = fmt.Sprintf("%d", id)
 	f.Name = rootName + subpath
 	id++
 	
