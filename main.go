@@ -170,6 +170,8 @@ func main() {
 		router.HandleFunc(fmt.Sprintf("/auth/%s/login", provider), loginHandler(provider))
 		router.HandleFunc(fmt.Sprintf("/auth/%s/callback", provider), callbackHandler(provider))
 	}
+	
+	router.HandleFunc("/supportedAuths", logHandler(handleSupportedAuths))
 
 	log.Printf("Starting webserver on port %d...", conf.Port)
 	if err := http.ListenAndServe(fmt.Sprintf(":%d", conf.Port), router); err != nil {

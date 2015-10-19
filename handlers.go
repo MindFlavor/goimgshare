@@ -85,6 +85,7 @@ func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Reque
 			http.Error(w, err.Error(), 100)
 			return
 		}
+		defer f.Close()
 
 		buf := new(bytes.Buffer)
 		_, err = buf.ReadFrom(f)
@@ -104,6 +105,22 @@ func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Reque
 			staticCache[localPath] = buf.Bytes()
 		}
 	}
+}
+
+func handleSupportedAuths(w http.ResponseWriter, r *http.Request) {
+	var sAuths []string
+	if conf.Facebook != nil {
+		sAuths = append(sAuths, "Facebook")
+	}		
+	if conf.Github != nil {
+		sAuths = append(sAuths, "Github")
+	}		
+	if conf.Google != nil {
+		sAuths = append(sAuths, "Google")
+	}	
+	
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(sAuths)
 }
 
 func jsonifyError(w http.ResponseWriter, err error) {
