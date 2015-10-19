@@ -56,7 +56,7 @@ func handleFolder(fnAcceptFileName func(strtomatch string) bool) func(w http.Res
 		files, err := ioutil.ReadDir(pf.Path)
 		if err != nil {
 			http.Error(w, err.Error(), 1)
-			log.Printf("501 error browsing folder %s: err", pf.ID, err)
+			log.Printf("501 error browsing folder %s: %s", pf.ID, err)
 			return
 		}
 
@@ -77,7 +77,7 @@ func handleStaticFile(w http.ResponseWriter, r *http.Request) {
 
 	folderid := vars["folderid"]
 	filename := vars["fn"]
-
+	
 	pf, found := phyFolders[folderid]
 	if !found {
 		http.NotFound(w, r)

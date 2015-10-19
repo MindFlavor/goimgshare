@@ -2,12 +2,13 @@
 package main
 
 import (
+	"path"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"path"
+	"path/filepath"
 	"regexp"
 	"strings"
 	"time"
@@ -16,7 +17,6 @@ import (
 
 	"github.com/mindflavor/goimgshare/authdb"
 	"github.com/mindflavor/goimgshare/config"
-	"github.com/mindflavor/goimgshare/folders/logical"
 	"github.com/mindflavor/goimgshare/folders/physical"
 	"github.com/mindflavor/goimgshare/thumb"
 
@@ -30,7 +30,7 @@ import (
 )
 
 const (
-	goimgshare_config_path_env = "GOIMGSHARECONF"
+	goimgshareConfigPathEnv = "GOIMGSHARECONF"
 )
 
 var aDB authdb.DB
@@ -43,13 +43,14 @@ func main() {
 	if len(os.Args) > 1 {
 		configFileName = os.Args[1]
 	} else {
-		configFileName = os.Getenv(goimgshare_config_path_env)
+		configFileName = os.Getenv(goimgshareConfigPathEnv)
 	}
 
 	if configFileName == "" {
+		_, file :=  filepath.Split(os.Args[0])
 		log.Printf("Syntax error. Must specify the configuration file either as ")
-		log.Printf("environmental variable (%s) or as first command argument.", goimgshare_config_path_env)
-		log.Fatalf("Program exiting")
+		log.Printf("environmental variable (%s) or as first command argument.", goimgshareConfigPathEnv)
+		log.Fatalf("%s program exiting.", file)
 		return
 	}
 
@@ -130,13 +131,13 @@ func main() {
 	router.HandleFunc("/avgthumb/{folderid}/{fn}", logHandler(requireAuth(handleThumbnail)))
 
 	// register all the static content with NO authentication
-	files, err := ioutil.ReadDir(path.Join(staticDirectory, staticDirectoryNoAuth))
+	files, err := ioutil.ReadDir(filepath.Join(conf.InternalHTTPFilesPath, staticDirectory, staticDirectoryNoAuth))
 	if err != nil {
 		panic(fmt.Sprintf("Cannot access static content folder: %s", err))
 	}
 
 	for _, file := range files {
-		path := fmt.Sprintf("/%s/%s", staticDirectory, file.Name())
+		path := path.Join("/", staticDirectory, file.Name())
 		log.Printf("Registering %s with noauth", path)
 
 		if conf.LogInternalHTTPFilesAccess {
@@ -147,13 +148,13 @@ func main() {
 	}
 
 	// register all the static content with authentication
-	files, err = ioutil.ReadDir(path.Join(staticDirectory, staticDirectoryAuth))
+	files, err = ioutil.ReadDir(filepath.Join(conf.InternalHTTPFilesPath, staticDirectory, staticDirectoryAuth))
 	if err != nil {
 		panic(fmt.Sprintf("Cannot access static content folder: %s", err))
 	}
 
 	for _, file := range files {
-		path := fmt.Sprintf("/%s/%s", staticDirectory, file.Name())
+		path := path.Join("/", staticDirectory, file.Name())
 		log.Printf("Registering %s with auth", path)
 
 		if conf.LogInternalHTTPFilesAccess {
@@ -170,8 +171,10 @@ func main() {
 		router.HandleFunc(fmt.Sprintf("/auth/%s/callback", provider), callbackHandler(provider))
 	}
 
-	log.Printf("Server running...")
-	http.ListenAndServe(fmt.Sprintf(":%d", conf.Port), router)
+	log.Printf("Starting webserver on port %d...", conf.Port)
+	if err := http.ListenAndServe(fmt.Sprintf(":%d", conf.Port), router); err != nil {
+		log.Fatalf("ERROR starting webserver: %s", err)
+	}
 }
 
 func loginHandler(providerName string) http.HandlerFunc {
@@ -239,8 +242,13 @@ func callbackHandler(providerName string) http.HandlerFunc {
 
 func generateSampleFolderFile() {
 	ps := physical.New()
-	ps["001"] = physical.Folder{&logical.Folder{ID: "001", Name: "C:\\temp"}, "C:\\temp", map[string]bool{"francesco.cogno@gmail.com": true, "valentina.campora@gmail.com": true}}
-	ps["002"] = physical.Folder{&logical.Folder{ID: "002", Name: "D:\\temp\\pic"}, "D:\\temp\\pic", map[string]bool{"francesco.cogno@gmail.com": true, "prova@test.com": true}}
+	ps["001"] = physical.Folder{Path: "C:\\temp", AuthorizedMails: map[string]bool{"francesco.cogno@gmail.com": true, "valentina.campora@gmail.com": true}}
+	ps["001"].ID = "001"
+	ps["001"].Name = "temp"
+
+	ps["002"] = physical.Folder{Path: "D:\\temp\\pic", AuthorizedMails: map[string]bool{"francesco.cogno@gmail.com": true, "prova@test.com": true}}
+	ps["002"].ID = "002"
+	ps["002"].Name = "pic"
 
 	file, err := os.Create("/home/MINDFLAVOR/mindflavor/shared_folders.json")
 	if err != nil {
@@ -254,6 +262,7 @@ func generateSampleFolderFile() {
 func generateSampleConfigurationFile() {
 	config := config.Config{
 		Port: 8080,
+		InternalHTTPFilesPath:          "/home/MINDFLAVOR/mindflavor/go/src/github.com/goimgshare",
 		SharedFoldersConfigurationFile: "/home/MINDFLAVOR/mindflavor/shared_folders.json",
 		ThumbnailCacheFolder:           "/home/MINDFLAVOR/mindflavor/thumbs",
 		CacheInternalHTTPFiles:         false,

@@ -1,7 +1,8 @@
 {
   "Port":8080,
   "CacheInternalHTTPFiles":false,
-  "LogInternalHTTPFilesAccess":false,
+  "LogInternalHTTPFilesAccess":true,
+  "InternalHTTPFilesPath": "/home/MINDFLAVOR/mindflavor/go/src/github.com/mindflavor/goimgshare",
   "SharedFoldersConfigurationFile":"/home/MINDFLAVOR/mindflavor/go/src/github.com/mindflavor/goimgshare/shared_folders.json",
   "ThumbnailCacheFolder":"/home/MINDFLAVOR/mindflavor/thumbs",
   "SmallThumbnailSize":500,

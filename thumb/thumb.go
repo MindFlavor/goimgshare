@@ -101,7 +101,7 @@ func (cache *Cache) generateJpegThumbnail(folder *physical.Folder, name string) 
 				log.Printf("ERROR: thumbcache::generateJpegThumbnail - Cannot create thumb file: %q", err)
 				return err
 			}
-			defer file.Close()
+			defer imgOut.Close()
 
 			if err := jpeg.Encode(imgOut, imgThumb, nil); err != nil {
 				return err

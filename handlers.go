@@ -58,7 +58,7 @@ func redirectHandler(redirectTo string) func(w http.ResponseWriter, r *http.Requ
 }
 
 func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {		
 		if r.URL.Path != "/" {
 			if r.URL.Path != "/"+staticDirectory+"/"+page {
 				http.NotFound(w, r)
@@ -67,7 +67,8 @@ func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Reque
 			}
 		}
 
-		localPath := path.Join(staticDirectory, folder, page)
+		localPath := path.Join(conf.InternalHTTPFilesPath, staticDirectory, folder, page)
+//		log.Printf("localPath %s", localPath)
 
 		if conf.CacheInternalHTTPFiles {
 			if buf, ok := staticCache[localPath]; ok {

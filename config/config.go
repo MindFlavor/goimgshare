@@ -13,6 +13,7 @@ type AuthProvider struct {
 
 type Config struct {
 	Port                           int
+	InternalHTTPFilesPath          string
 	CacheInternalHTTPFiles         bool
 	LogInternalHTTPFilesAccess     bool
 	SharedFoldersConfigurationFile string
