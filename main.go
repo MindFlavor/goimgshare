@@ -2,12 +2,12 @@
 package main
 
 import (
-	"path"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"path"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -47,7 +47,7 @@ func main() {
 	}
 
 	if configFileName == "" {
-		_, file :=  filepath.Split(os.Args[0])
+		_, file := filepath.Split(os.Args[0])
 		log.Printf("Syntax error. Must specify the configuration file either as ")
 		log.Printf("environmental variable (%s) or as first command argument.", goimgshareConfigPathEnv)
 		log.Fatalf("%s program exiting.", file)
@@ -81,8 +81,8 @@ func main() {
 	}
 	// end load folders
 
-	prov := make([]common.Provider, 0)
-	providers := make([]string, 0)
+	var prov []common.Provider
+	var providers []string
 
 	if conf.Google != nil {
 		providers = append(providers, "google")
@@ -170,7 +170,7 @@ func main() {
 		router.HandleFunc(fmt.Sprintf("/auth/%s/login", provider), loginHandler(provider))
 		router.HandleFunc(fmt.Sprintf("/auth/%s/callback", provider), callbackHandler(provider))
 	}
-	
+
 	router.HandleFunc("/supportedAuths", logHandler(handleSupportedAuths))
 
 	log.Printf("Starting webserver on port %d...", conf.Port)

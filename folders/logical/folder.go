@@ -7,4 +7,5 @@ type Folder struct {
 	Name string
 }
 
+// Folders is the folder list type
 type Folders []*Folder

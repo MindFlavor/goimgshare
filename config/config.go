@@ -5,12 +5,19 @@ import (
 	"io"
 )
 
+// AuthProvider struct contains
+// the information required to
+// configure the clientID and secret
+// for the authentication providers.
 type AuthProvider struct {
 	ClientID  string
 	Secret    string
 	ReturnURL string
 }
 
+// Config is the main configuration
+// file. See README.md for details
+// on the field usage.
 type Config struct {
 	Port                           int
 	InternalHTTPFilesPath          string

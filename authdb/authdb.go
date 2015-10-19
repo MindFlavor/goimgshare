@@ -10,26 +10,40 @@ import (
 	"github.com/mindflavor/goimgshare/folders/physical"
 )
 
+// Signature is the
+// opaque mail signature
 type Signature string
 
+// AuthToken contains the
+// runtime association between
+// Signature and email
 type AuthToken struct {
 	Sig        Signature
 	Expiration time.Time
 	email      string
 }
 
+// DB is the in-memory
+// store of valid emails
+// signatures
 type DB map[Signature]AuthToken
 
+// New creates a new authdb.DB
 func New() DB {
 	return make(map[Signature]AuthToken)
 }
 
+// Register adds a new email
+// to the DB
 func (db DB) Register(s string, email string, expiration time.Time) AuthToken {
 	sig := Signature(signature.RandomKey(64))
 	db[sig] = AuthToken{sig, expiration, email}
 	return db[sig]
 }
 
+// IsRegistered is true if the
+// signature is registered in the
+// DB
 func (db DB) IsRegistered(sig Signature) bool {
 	val, found := db[sig]
 
@@ -46,6 +60,9 @@ func (db DB) IsRegistered(sig Signature) bool {
 	return false
 }
 
+// EmailFromHTTPRequest translates the
+// cookie from the http.Request in the
+// authenticated email (if present and valid)
 func (db DB) EmailFromHTTPRequest(r *http.Request) string {
 	auth := "unauthenticated"
 
@@ -57,6 +74,9 @@ func (db DB) EmailFromHTTPRequest(r *http.Request) string {
 	return auth
 }
 
+// Email extracts the email
+// linked to the Signature passed as parameter
+// (if present)
 func (db DB) Email(sig Signature) (string, error) {
 	val, found := db[sig]
 
@@ -67,6 +87,9 @@ func (db DB) Email(sig Signature) (string, error) {
 	return "forged identity", fmt.Errorf("Invalid signature %s", sig)
 }
 
+// IsAuthorized returns true if the
+// specified user (extracted from the http.Request)
+// can rightfully access the folderID in physical.Folders
 func (db DB) IsAuthorized(phyFolders *physical.Folders, r *http.Request, folderID string) bool {
 	cookie, err := r.Cookie("auth")
 	if err != nil {

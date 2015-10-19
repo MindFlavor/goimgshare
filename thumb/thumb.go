@@ -17,16 +17,22 @@ import (
 	"github.com/nfnt/resize"
 )
 
+// Cache is the thumbnail
+// cache type.
 type Cache struct {
 	cachePath string
 	maxWidth  uint
 	maxHeight uint
 }
 
+// New initialized a new Cache with
+// specified parameters.
 func New(cachePath string, maxWidth, maxHeight uint) *Cache {
 	return &Cache{cachePath, maxWidth, maxHeight}
 }
 
+// GetThumb returns the thumbnail
+// stream or an error.
 func (cache *Cache) GetThumb(folder *physical.Folder, name string) (io.Reader, error) {
 	if err := cache.generateJpegThumbnail(folder, name); err != nil {
 		return nil, err

@@ -58,7 +58,7 @@ func redirectHandler(redirectTo string) func(w http.ResponseWriter, r *http.Requ
 }
 
 func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {		
+	return func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
 			if r.URL.Path != "/"+staticDirectory+"/"+page {
 				http.NotFound(w, r)
@@ -68,7 +68,7 @@ func handleStatic(folder, page string) func(w http.ResponseWriter, r *http.Reque
 		}
 
 		localPath := path.Join(conf.InternalHTTPFilesPath, staticDirectory, folder, page)
-//		log.Printf("localPath %s", localPath)
+		//		log.Printf("localPath %s", localPath)
 
 		if conf.CacheInternalHTTPFiles {
 			if buf, ok := staticCache[localPath]; ok {
@@ -111,14 +111,14 @@ func handleSupportedAuths(w http.ResponseWriter, r *http.Request) {
 	var sAuths []string
 	if conf.Facebook != nil {
 		sAuths = append(sAuths, "Facebook")
-	}		
+	}
 	if conf.Github != nil {
 		sAuths = append(sAuths, "Github")
-	}		
+	}
 	if conf.Google != nil {
 		sAuths = append(sAuths, "Google")
-	}	
-	
+	}
+
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(sAuths)
 }

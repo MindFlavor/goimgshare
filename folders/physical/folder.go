@@ -8,7 +8,7 @@ import (
 	"github.com/mindflavor/goimgshare/folders/logical"
 )
 
-// File is a phyisical representation
+// Folder is a phyisical representation
 // of a shared file
 type Folder struct {
 	*logical.Folder
@@ -16,8 +16,10 @@ type Folder struct {
 	AuthorizedMails map[string]bool
 }
 
+// Folders is the folder list type
 type Folders map[string]Folder
 
+// New creates a new Folders list
 func New() Folders {
 	return make(Folders)
 }
@@ -52,6 +54,8 @@ func Load(r io.Reader) (Folders, error) {
 	return f, nil
 }
 
+// ToLogical translates the Physical folders
+// into Logical ones (ie without path).
 func (f Folders) ToLogical() logical.Folders {
 	log := make([]*logical.Folder, 0, len(f))
 
@@ -62,6 +66,8 @@ func (f Folders) ToLogical() logical.Folders {
 	return log
 }
 
+// IsAuthorized returns true if the
+// mail can access folderID
 func (f Folders) IsAuthorized(folderID string, mail string) bool {
 	ret, found := f[folderID]
 	if !found {

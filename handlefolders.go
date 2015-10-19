@@ -77,7 +77,7 @@ func handleStaticFile(w http.ResponseWriter, r *http.Request) {
 
 	folderid := vars["folderid"]
 	filename := vars["fn"]
-	
+
 	pf, found := phyFolders[folderid]
 	if !found {
 		http.NotFound(w, r)
@@ -154,7 +154,6 @@ func formatSize(size int64) string {
 		return fmt.Sprintf("%d KB", size/1024)
 	} else if size < 1024*1024*1024 {
 		return fmt.Sprintf("%d MB", size/(1024*1024))
-	} else {
-		return fmt.Sprintf("%d GB", size/(1024*1024*1024))
 	}
+	return fmt.Sprintf("%d GB", size/(1024*1024*1024))
 }
