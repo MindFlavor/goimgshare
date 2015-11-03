@@ -1,5 +1,6 @@
-# GO Image and video share
+[![Build Status](https://travis-ci.org/MindFlavor/goimgshare.svg)](https://travis-ci.org/MindFlavor/goimgshare)
 
+# GO Image and video share
 
 GO Image and video share is a program that creates a file sharing website useful to share images and other files. The main features are:
 - Support for Facebook authentication
