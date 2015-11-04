@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Goimgshare : Secure image and file share website with custom permissions and thumbnail generation">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Goimgshare</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/MindFlavor/goimgshare">View on GitHub</a>
+
+          <h1 id="project_title">Goimgshare</h1>
+          <h2 id="project_tagline">Secure image and file share website with custom permissions and thumbnail generation</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/MindFlavor/goimgshare/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/MindFlavor/goimgshare/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><a href="https://travis-ci.org/MindFlavor/goimgshare"><img src="https://travis-ci.org/MindFlavor/goimgshare.svg?branch=master" alt="Build Status"></a></p>
+
+<h1>
+<a id="go-image-and-video-share" class="anchor" href="#go-image-and-video-share" aria-hidden="true"><span class="octicon octicon-link"></span></a>GO Image and video share</h1>
+
+<p>GO Image and video share is a program that creates a file sharing website useful to share images and other files. The main features are:</p>
+
+<ul>
+<li>Support for Facebook authentication</li>
+<li>Support for Google authentication</li>
+<li>Support for GitHub authentication. </li>
+<li>Automatic image resize for faster thumbnails (with cache)</li>
+</ul>
+
+<h2>
+<a id="how-install" class="anchor" href="#how-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>How install</h2>
+
+<h4>
+<a id="check-go-installation" class="anchor" href="#check-go-installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check GO installation</h4>
+
+<p>Ensure to have GO installed (tested with 1.5). If not sure issue: </p>
+
+<pre><code>go version
+</code></pre>
+
+<p>from command line. Make sure to have a valid <code>$GOPATH</code> environment variable. </p>
+
+<h4>
+<a id="get-the-source-code" class="anchor" href="#get-the-source-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get the source code</h4>
+
+<pre><code>go get -u github.com/mindflavor/goimgshare
+</code></pre>
+
+<p>This will get the source code. You can use the same command later to update the source code.</p>
+
+<h4>
+<a id="copy-sample-configuration-files" class="anchor" href="#copy-sample-configuration-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copy sample configuration files</h4>
+
+<p>This step is optional, you can edit the original files without copying them. In that case, however, you will have to stash your changes before updating the source code.</p>
+
+<pre><code>cp $GOPATH/src/github.com/mindflavor/goimgshare/config.json /etc/goimgshare/config.json
+cp $GOPATH/src/github.com/mindflavor/goimgshare/shared_folders.json /etc/goimgshare/shared_folders.json
+</code></pre>
+
+<p>Of course replace <code>/etc/goimgshare</code> with your path. Windows users should use a Windows path of your choosing.</p>
+
+<h4>
+<a id="edit-the-configuration-files" class="anchor" href="#edit-the-configuration-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit the configuration files</h4>
+
+<p>There are two configuration files, one for the general configuration and another for the shared folders. </p>
+
+<h5>
+<a id="main-configuration-file" class="anchor" href="#main-configuration-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main configuration file</h5>
+
+<div class="highlight highlight-source-json"><pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>Port<span class="pl-pds">"</span></span>:<span class="pl-c1">8080</span>,
+  <span class="pl-s"><span class="pl-pds">"</span>CacheInternalHTTPFiles<span class="pl-pds">"</span></span>:<span class="pl-c1">false</span>,
+  <span class="pl-s"><span class="pl-pds">"</span>LogInternalHTTPFilesAccess<span class="pl-pds">"</span></span>:<span class="pl-c1">true</span>,
+  <span class="pl-s"><span class="pl-pds">"</span>InternalHTTPFilesPath<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>D:<span class="pl-cce">\\</span>GIT<span class="pl-cce">\\</span>Go<span class="pl-cce">\\</span>src<span class="pl-cce">\\</span>github.com<span class="pl-cce">\\</span>mindflavor<span class="pl-cce">\\</span>goimgshare<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>SharedFoldersConfigurationFile<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>D:<span class="pl-cce">\\</span>temp<span class="pl-cce">\\</span>shared_folders.json<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>ThumbnailCacheFolder<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>D:<span class="pl-cce">\\</span>temp<span class="pl-cce">\\</span>thumbs<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>SmallThumbnailSize<span class="pl-pds">"</span></span>:<span class="pl-c1">500</span>,
+  <span class="pl-s"><span class="pl-pds">"</span>AverageThumbnailSize<span class="pl-pds">"</span></span>:<span class="pl-c1">1000</span>,
+  <span class="pl-s"><span class="pl-pds">"</span>Google<span class="pl-pds">"</span></span>:{
+    <span class="pl-s"><span class="pl-pds">"</span>ClientID<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>247709547460-aovc4l7ghgs2senq0cr2ivphiu12kssv.apps.googleusercontent.com<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>Secret<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>h7tgEmIMHf6Q-xvQQcP9glmQ<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>ReturnURL<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>http://localhost:8080/auth/google/callback<span class="pl-pds">"</span></span>},
+  <span class="pl-s"><span class="pl-pds">"</span>Facebook<span class="pl-pds">"</span></span>:<span class="pl-c1">null</span>,
+  <span class="pl-s"><span class="pl-pds">"</span>Github<span class="pl-pds">"</span></span>:<span class="pl-c1">null</span>
+}</pre></div>
+
+<p>The attributes are:</p>
+
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Port</code></td>
+<td>The webserver port. If the port is already in use the program will panic.</td>
+</tr>
+<tr>
+<td><code>CacheInternalHTTPFiles</code></td>
+<td>If <code>true</code> the webserver will cache in memory the static HTML an JS files. <code>false</code> is useful if you are editing the files because you don't need to restart the program to see the changes.</td>
+</tr>
+<tr>
+<td><code>LogInternalHTTPFilesAccess</code></td>
+<td>If <code>true</code> the console will log the access to static HTML and JS files.</td>
+</tr>
+<tr>
+<td><code>InternalHTTPFilesPath</code></td>
+<td>This folder must point to the <code>goimgshare</code> root folder. It will be <code>$GOPATH/src/github.com/mindflavor/goimgshare</code> unless moved.</td>
+</tr>
+<tr>
+<td><code>SharedFoldersConfigurationFile</code></td>
+<td>The shared folders configuration file. It will be read at startup so if you change it you will need to restart the program.</td>
+</tr>
+<tr>
+<td><code>ThumbnailCacheFolder</code></td>
+<td>Thumbnail cache folder. It must be a valid path.</td>
+</tr>
+<tr>
+<td><code>SmallThumbnailSize</code></td>
+<td>Thumbnail size in pixels. Smaller images are faster but of course will be grainy on high-resolution displays. Note that you need to clean the <code>ThumbnailCacheFolder</code> manually if you change this.</td>
+</tr>
+<tr>
+<td><code>AverageThumbnailSize</code></td>
+<td>Unused at the moment.</td>
+</tr>
+<tr>
+<td><code>Google::ClientID</code></td>
+<td>Your Google client ID.</td>
+</tr>
+<tr>
+<td><code>Google::Secret</code></td>
+<td>Your Google client secret.</td>
+</tr>
+<tr>
+<td><code>Google::ReturnURL</code></td>
+<td>Google authentication return URL. Do not change the suffix <code>/auth/google/callback</code>.</td>
+</tr>
+<tr>
+<td><code>Facebook::ClientID</code></td>
+<td>Your Facebook client ID.</td>
+</tr>
+<tr>
+<td><code>Facebook::Secret</code></td>
+<td>Your Facebook client secret.</td>
+</tr>
+<tr>
+<td><code>Facebook::ReturnURL</code></td>
+<td>Facebook authentication return URL. Do not change the suffix <code>/auth/google/callback</code>.</td>
+</tr>
+<tr>
+<td><code>Github::ClientID</code></td>
+<td>Your Github client ID.</td>
+</tr>
+<tr>
+<td><code>Github::Secret</code></td>
+<td>Your Github client secret.</td>
+</tr>
+<tr>
+<td><code>Github::ReturnURL</code></td>
+<td>Github authentication return URL. Do not change the suffix <code>/auth/google/callback</code>.</td>
+</tr>
+</tbody>
+</table>
+
+<p>As you can see, the authentication providers are optional. Just make sure to specify at least one or you won't be able to log in! <img class="emoji" title=":wink:" alt=":wink:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle">.</p>
+
+<h5>
+<a id="shared-folders-configuration-file" class="anchor" href="#shared-folders-configuration-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Shared folders configuration file</h5>
+
+<p>This is a sample shared folders configuration file:</p>
+
+<div class="highlight highlight-source-json"><pre>[
+  {
+    <span class="pl-s"><span class="pl-pds">"</span>ID<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>001<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>Name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>temp on D<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>Path<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>D:<span class="pl-cce">\\</span>temp on D<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>AuthorizedMails<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>francesco.cogno@gmail.com<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>valentina.test@gmail.com<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+    }
+  },
+  {
+    <span class="pl-s"><span class="pl-pds">"</span>ID<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>002<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>Name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>temp on C<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>Path<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>C:<span class="pl-cce">\\</span>temp<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>AuthorizedMails<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>francesco.cogno@gmail.com<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>prova@test.com<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+    }
+  }
+]
+</pre></div>
+
+<p>The file is an array of shared folders. The first folder can be viewed - along with its contenints - by      <a href="mailto:francesco.cogno@gmail.com">francesco.cogno@gmail.com</a> and <a href="mailto:valentina.test@gmail.com">valentina.test@gmail.com</a>. The second folder is also accessible by <a href="mailto:francesco.cogno@gmail.com">francesco.cogno@gmail.com</a> but not by <a href="mailto:valentina.test@gmail.com">valentina.test@gmail.com</a>. It's the only folder accessible by <a href="mailto:prova@test.com">prova@test.com</a>.</p>
+
+<p>The shared folder fields are:</p>
+
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>An arbitrary ID. It can be anything you want as long as it is unique in the array.</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>The user-facing folder name. It does not have to be unique (but it will be confusing if it is not).</td>
+</tr>
+<tr>
+<td>Path</td>
+<td>The path of the folder. The folder should be accessible and the files within should be readable by the program's account.</td>
+</tr>
+<tr>
+<td>AuthorizedMails</td>
+<td>Is a map of emails and a <code>boolean</code> indicating if the mail has access. Any email not specified here is not allowed to access the folder (and will not see it either in the list). The same happens if you specify false as mail attribute (useful if you want to temporarily revoke user access).</td>
+</tr>
+</tbody>
+</table>
+
+<h4>
+<a id="build-and-install-the-program" class="anchor" href="#build-and-install-the-program" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build and install the program</h4>
+
+<pre><code>go install github.com/mindflavor/goimgshare
+</code></pre>
+
+<p>This will place the binary in your <code>$GOPATH\bin</code> folder.</p>
+
+<h4>
+<a id="start-the-program-specifying-the-main-configuration-file" class="anchor" href="#start-the-program-specifying-the-main-configuration-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start the program specifying the main configuration file</h4>
+
+<pre><code>$GOPATH/bin/goimgshare /etc/goimgshare/config.json
+</code></pre>
+
+<p>If everything goes as planned (ie there are no bugs and the configuration files are correct) you should see something like this:</p>
+
+<p><img src="http://i.imgur.com/YSssxWY.jpg" alt=""></p>
+
+<p>And you will be able to browse the http://localhost: address. Since you are not authenticated you will see the authentication page (the number of authentication providers is dependent on the configuration - check the [authentication_providers] section for details):</p>
+
+<p><img src="http://i.imgur.com/E2nKiGH.png" alt=""></p>
+
+<p>Here we have Google and Facebook as authentication providers. Note that the links are dynamic and dependent on the configuration (so you won't see a button if you have not configured the relevant provider). </p>
+
+<h3>
+<a id="acknowledgements" class="anchor" href="#acknowledgements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Acknowledgements</h3>
+
+<p>This program uses these libraries:</p>
+
+<ul>
+<li><a href="https://github.com/stretchr/gomniauth">https://github.com/stretchr/gomniauth</a></li>
+<li><a href="https://github.com/stretchr/signature">https://github.com/stretchr/signature</a></li>
+<li><a href="https://github.com/gorilla/mux">https://github.com/gorilla/mux</a></li>
+<li><a href="https://github.com/nfnt/resize">https://github.com/nfnt/resize</a></li>
+<li><a href="https://angularjs.org/">AngularJS</a></li>
+<li><a href="http://getbootstrap.com/">Bootstrap</a></li>
+</ul>
+
+<hr>
+
+<p><strong>Happy coding</strong></p>
+
+<p><a href="francesco.cogno@outlook.com">Francesco Cogno</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Goimgshare maintained by <a href="https://github.com/MindFlavor">MindFlavor</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
