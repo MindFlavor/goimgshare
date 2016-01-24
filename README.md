@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/MindFlavor/goimgshare.svg?branch=master)](https://travis-ci.org/MindFlavor/goimgshare)
+[![Build Status](https://travis-ci.org/MindFlavor/goimgshare.svg?branch=master)](https://travis-ci.org/MindFlavor/goimgshare) [![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
 
 # GO Image and video share
 
