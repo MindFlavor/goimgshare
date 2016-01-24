@@ -10,9 +10,9 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"sort"
 
 	"github.com/gorilla/mux"
-
 	"github.com/mindflavor/goimgshare/folders/logical"
 )
 
@@ -22,7 +22,7 @@ type fnWithSize struct {
 }
 
 func handleFolders(w http.ResponseWriter, r *http.Request) {
-	var logFolders []*logical.Folder
+	var logFolders logical.Folders
 
 	// add only authorized folders
 	for _, pf := range phyFolders {
@@ -30,6 +30,8 @@ func handleFolders(w http.ResponseWriter, r *http.Request) {
 			logFolders = append(logFolders, pf.Folder)
 		}
 	}
+
+	sort.Sort(logFolders)
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	json.NewEncoder(w).Encode(logFolders)
