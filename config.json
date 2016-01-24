@@ -7,6 +7,8 @@
   "ThumbnailCacheFolder":"D:\\temp",
   "SmallThumbnailSize":500,
   "AverageThumbnailSize":1000,
+  "HttpsCertificateFile":"C:\\temp\\star_mindflavor.it.pem",
+  "HttpsCertificateKeyFile":"C:\\temp\\star_mindflavor.it.key",
   "Google":{
     "ClientID":"1076712416430-kst5ildq694fa4ntin0t4f432pnfitcp.apps.googleusercontent.com",
     "Secret":"FFEq-52VNT4NAUybziEs09vd",

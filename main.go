@@ -179,10 +179,19 @@ func main() {
 
 	router.HandleFunc("/supportedAuths", logHandler(handleSupportedAuths))
 
-	log.Printf("Starting webserver on port %d...", conf.Port)
-	if err := http.ListenAndServe(fmt.Sprintf(":%d", conf.Port), router); err != nil {
-		log.Fatalf("ERROR starting webserver: %s", err)
+	if conf.HttpsCertificateFile != "" && conf.HttpsCertificateKeyFile != "" {
+		log.Printf("Starting encrypted TLS webserver on port %d...", conf.Port)
+		if err := http.ListenAndServeTLS(fmt.Sprintf(":%d", conf.Port), conf.HttpsCertificateFile, conf.HttpsCertificateKeyFile, router); err != nil {
+			log.Fatalf("ERROR starting webserver: %s", err)
+		}
+	} else {
+		log.Printf("Starting non encrypted webserver on port %d...", conf.Port)
+		if err := http.ListenAndServe(fmt.Sprintf(":%d", conf.Port), router); err != nil {
+			log.Fatalf("ERROR starting webserver: %s", err)
+		}
 	}
+
+	//	http.ListenAndServeTLS()
 }
 
 func loginHandler(providerName string) http.HandlerFunc {

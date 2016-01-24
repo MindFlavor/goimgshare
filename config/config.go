@@ -27,6 +27,8 @@ type Config struct {
 	ThumbnailCacheFolder           string
 	SmallThumbnailSize             uint
 	AverageThumbnailSize           uint
+	HttpsCertificateFile           string
+	HttpsCertificateKeyFile        string
 	Google                         *AuthProvider
 	Facebook                       *AuthProvider
 	Github                         *AuthProvider
