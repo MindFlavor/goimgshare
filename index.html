@@ -1,40 +1,28 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Goimgshare : Secure image and file share website with custom permissions and thumbnail generation">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Goimgshare</title>
+    <meta charset="UTF-8">
+    <title>GoImgShare by MindFlavor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">GoImgShare</h1>
+      <h2 class="project-tagline">Secure image and file share website with custom permissions and thumbnail generation</h2>
+      <a href="https://github.com/MindFlavor/goimgshare" class="btn">View on GitHub</a>
+      <a href="https://github.com/MindFlavor/goimgshare/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/MindFlavor/goimgshare/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/MindFlavor/goimgshare">View on GitHub</a>
-
-          <h1 id="project_title">Goimgshare</h1>
-          <h2 id="project_tagline">Secure image and file share website with custom permissions and thumbnail generation</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/MindFlavor/goimgshare/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/MindFlavor/goimgshare/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p><a href="https://travis-ci.org/MindFlavor/goimgshare"><img src="https://travis-ci.org/MindFlavor/goimgshare.svg?branch=master" alt="Build Status"></a></p>
+    <section class="main-content">
+      <p><a href="https://travis-ci.org/MindFlavor/goimgshare"><img src="https://travis-ci.org/MindFlavor/goimgshare.svg?branch=master" alt="Build Status"></a> <a href="http://github.com/badges/stability-badges"><img src="http://badges.github.io/stability-badges/dist/stable.svg" alt="stable"></a> <a href="https://coveralls.io/github/MindFlavor/goimgshare?branch=master"><img src="https://coveralls.io/repos/github/MindFlavor/goimgshare/badge.svg?branch=master" alt="Coverage Status"></a></p>
 
 <h1>
-<a id="go-image-and-video-share" class="anchor" href="#go-image-and-video-share" aria-hidden="true"><span class="octicon octicon-link"></span></a>GO Image and video share</h1>
+<a id="go-image-and-video-share" class="anchor" href="#go-image-and-video-share" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GO Image and video share</h1>
 
 <p>GO Image and video share is a program that creates a file sharing website useful to share images and other files. The main features are:</p>
 
@@ -46,10 +34,10 @@
 </ul>
 
 <h2>
-<a id="how-install" class="anchor" href="#how-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>How install</h2>
+<a id="how-install" class="anchor" href="#how-install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How install</h2>
 
 <h4>
-<a id="check-go-installation" class="anchor" href="#check-go-installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check GO installation</h4>
+<a id="check-go-installation" class="anchor" href="#check-go-installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Check GO installation</h4>
 
 <p>Ensure to have GO installed (tested with 1.5). If not sure issue: </p>
 
@@ -59,7 +47,7 @@
 <p>from command line. Make sure to have a valid <code>$GOPATH</code> environment variable. </p>
 
 <h4>
-<a id="get-the-source-code" class="anchor" href="#get-the-source-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get the source code</h4>
+<a id="get-the-source-code" class="anchor" href="#get-the-source-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get the source code</h4>
 
 <pre><code>go get -u github.com/mindflavor/goimgshare
 </code></pre>
@@ -67,7 +55,7 @@
 <p>This will get the source code. You can use the same command later to update the source code.</p>
 
 <h4>
-<a id="copy-sample-configuration-files" class="anchor" href="#copy-sample-configuration-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copy sample configuration files</h4>
+<a id="copy-sample-configuration-files" class="anchor" href="#copy-sample-configuration-files" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Copy sample configuration files</h4>
 
 <p>This step is optional, you can edit the original files without copying them. In that case, however, you will have to stash your changes before updating the source code.</p>
 
@@ -78,12 +66,12 @@ cp $GOPATH/src/github.com/mindflavor/goimgshare/shared_folders.json /etc/goimgsh
 <p>Of course replace <code>/etc/goimgshare</code> with your path. Windows users should use a Windows path of your choosing.</p>
 
 <h4>
-<a id="edit-the-configuration-files" class="anchor" href="#edit-the-configuration-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit the configuration files</h4>
+<a id="edit-the-configuration-files" class="anchor" href="#edit-the-configuration-files" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Edit the configuration files</h4>
 
 <p>There are two configuration files, one for the general configuration and another for the shared folders. </p>
 
 <h5>
-<a id="main-configuration-file" class="anchor" href="#main-configuration-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main configuration file</h5>
+<a id="main-configuration-file" class="anchor" href="#main-configuration-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Main configuration file</h5>
 
 <div class="highlight highlight-source-json"><pre>{
   <span class="pl-s"><span class="pl-pds">"</span>Port<span class="pl-pds">"</span></span>:<span class="pl-c1">8080</span>,
@@ -145,6 +133,14 @@ cp $GOPATH/src/github.com/mindflavor/goimgshare/shared_folders.json /etc/goimgsh
 <td>Unused at the moment.</td>
 </tr>
 <tr>
+<td><code>HTTPSCertificateFile</code></td>
+<td>Optional certificate file. If you speficy this and the following attribute GoImgShare will use TLS.</td>
+</tr>
+<tr>
+<td><code>HTTPSCertificateKeyFile</code></td>
+<td>Optional certificate key file. If you speficy this and the previous attribute GoImgShare will use TLS.</td>
+</tr>
+<tr>
 <td><code>Google::ClientID</code></td>
 <td>Your Google client ID.</td>
 </tr>
@@ -186,7 +182,7 @@ cp $GOPATH/src/github.com/mindflavor/goimgshare/shared_folders.json /etc/goimgsh
 <p>As you can see, the authentication providers are optional. Just make sure to specify at least one or you won't be able to log in! <img class="emoji" title=":wink:" alt=":wink:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle">.</p>
 
 <h5>
-<a id="shared-folders-configuration-file" class="anchor" href="#shared-folders-configuration-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Shared folders configuration file</h5>
+<a id="shared-folders-configuration-file" class="anchor" href="#shared-folders-configuration-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shared folders configuration file</h5>
 
 <p>This is a sample shared folders configuration file:</p>
 
@@ -244,7 +240,7 @@ cp $GOPATH/src/github.com/mindflavor/goimgshare/shared_folders.json /etc/goimgsh
 </table>
 
 <h4>
-<a id="build-and-install-the-program" class="anchor" href="#build-and-install-the-program" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build and install the program</h4>
+<a id="build-and-install-the-program" class="anchor" href="#build-and-install-the-program" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build and install the program</h4>
 
 <pre><code>go install github.com/mindflavor/goimgshare
 </code></pre>
@@ -252,7 +248,7 @@ cp $GOPATH/src/github.com/mindflavor/goimgshare/shared_folders.json /etc/goimgsh
 <p>This will place the binary in your <code>$GOPATH\bin</code> folder.</p>
 
 <h4>
-<a id="start-the-program-specifying-the-main-configuration-file" class="anchor" href="#start-the-program-specifying-the-main-configuration-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start the program specifying the main configuration file</h4>
+<a id="start-the-program-specifying-the-main-configuration-file" class="anchor" href="#start-the-program-specifying-the-main-configuration-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Start the program specifying the main configuration file</h4>
 
 <pre><code>$GOPATH/bin/goimgshare /etc/goimgshare/config.json
 </code></pre>
@@ -268,7 +264,7 @@ cp $GOPATH/src/github.com/mindflavor/goimgshare/shared_folders.json /etc/goimgsh
 <p>Here we have Google and Facebook as authentication providers. Note that the links are dynamic and dependent on the configuration (so you won't see a button if you have not configured the relevant provider). </p>
 
 <h3>
-<a id="acknowledgements" class="anchor" href="#acknowledgements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Acknowledgements</h3>
+<a id="acknowledgements" class="anchor" href="#acknowledgements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Acknowledgements</h3>
 
 <p>This program uses these libraries:</p>
 
@@ -286,18 +282,15 @@ cp $GOPATH/src/github.com/mindflavor/goimgshare/shared_folders.json /etc/goimgsh
 <p><strong>Happy coding</strong></p>
 
 <p><a href="francesco.cogno@outlook.com">Francesco Cogno</a></p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Goimgshare maintained by <a href="https://github.com/MindFlavor">MindFlavor</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/MindFlavor/goimgshare">GoImgShare</a> is maintained by <a href="https://github.com/MindFlavor">MindFlavor</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-    
+    </section>
 
+  
   </body>
 </html>
