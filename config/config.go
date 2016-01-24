@@ -38,9 +38,11 @@ func (config *Config) Save(w io.Writer) {
 }
 
 // Load loads the config from a stream
-func Load(r io.Reader) *Config {
+func Load(r io.Reader) (*Config, error) {
 	var config Config
-	json.NewDecoder(r).Decode(&config)
+	if err := json.NewDecoder(r).Decode(&config); err != nil {
+		return nil, err
+	}
 
-	return &config
+	return &config, nil
 }

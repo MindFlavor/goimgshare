@@ -54,13 +54,18 @@ func main() {
 		return
 	}
 
+	log.Printf("Opening %s", configFileName)
+
 	file, err := os.Open(configFileName)
 	if err != nil {
 		panic(fmt.Sprintf("Cannot open configuration file: %s ", err))
 	}
 	defer file.Close()
 
-	conf = config.Load(file)
+	conf, err = config.Load(file)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to load configuration file: %s ", err))
+	}
 
 	gomniauth.SetSecurityKey(signature.RandomKey(64))
 
@@ -70,6 +75,7 @@ func main() {
 	avgThumbCache = thumb.New(conf.ThumbnailCacheFolder, conf.AverageThumbnailSize, conf.AverageThumbnailSize)
 
 	// load folders
+	fmt.Printf("conf.SharedFoldersConfigurationFile == %s", conf.SharedFoldersConfigurationFile)
 	file, err = os.Open(conf.SharedFoldersConfigurationFile)
 	if err != nil {
 		panic(fmt.Sprintf("Cannot open shared folder configuration file: %s ", err))
