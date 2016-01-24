@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 
 	"github.com/mindflavor/goimgshare/folders/physical"
-	"github.com/mindflavor/goimgshare/folders/logical"
 )
 
 var autMails map[string]bool
@@ -24,9 +23,9 @@ func main() {
 	for _, item := range os.Args[3:] {
 		autMails[item] = true
 	}
-	
+
 	pfs = physical.New()
-	
+
 	_, rootName = filepath.Split(root)
 
 	addFolder(root, root)
@@ -36,7 +35,7 @@ func main() {
 		panic(err)
 	}
 	defer file.Close()
-	
+
 	pfs.Save(file)
 }
 
@@ -45,11 +44,14 @@ func addFolder(root, path string) {
 	subpath := path[len(root):]
 
 	// add item
-	f := physical.Folder{&logical.Folder{}, path, autMails}
+	f := physical.Folder{}
+	f.Path = path
+	f.AuthorizedMails = autMails
+
 	f.ID = fmt.Sprintf("%d", id)
 	f.Name = rootName + subpath
 	id++
-	
+
 	pfs[f.ID] = f
 
 	files, err := ioutil.ReadDir(path)

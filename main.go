@@ -179,9 +179,9 @@ func main() {
 
 	router.HandleFunc("/supportedAuths", logHandler(handleSupportedAuths))
 
-	if conf.HttpsCertificateFile != "" && conf.HttpsCertificateKeyFile != "" {
+	if conf.HTTPSCertificateFile != "" && conf.HTTPSCertificateKeyFile != "" {
 		log.Printf("Starting encrypted TLS webserver on port %d...", conf.Port)
-		if err := http.ListenAndServeTLS(fmt.Sprintf(":%d", conf.Port), conf.HttpsCertificateFile, conf.HttpsCertificateKeyFile, router); err != nil {
+		if err := http.ListenAndServeTLS(fmt.Sprintf(":%d", conf.Port), conf.HTTPSCertificateFile, conf.HTTPSCertificateKeyFile, router); err != nil {
 			log.Fatalf("ERROR starting webserver: %s", err)
 		}
 	} else {
