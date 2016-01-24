@@ -63,6 +63,8 @@ Attribute | Explanation
 ```ThumbnailCacheFolder```|Thumbnail cache folder. It must be a valid path.
 ```SmallThumbnailSize```|Thumbnail size in pixels. Smaller images are faster but of course will be grainy on high-resolution displays. Note that you need to clean the ```ThumbnailCacheFolder``` manually if you change this.
 ```AverageThumbnailSize```|Unused at the moment.
+```HTTPSCertificateFile```|Optional certificate file. If you speficy this and the following attribute GoImgShare will use TLS.
+```HTTPSCertificateKeyFile```|Optional certificate key file. If you speficy this and the previous attribute GoImgShare will use TLS.
 ```Google::ClientID```|Your Google client ID. 
 ```Google::Secret```|Your Google client secret. 
 ```Google::ReturnURL```|Google authentication return URL. Do not change the suffix ```/auth/google/callback```.
